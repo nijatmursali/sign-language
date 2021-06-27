@@ -64,12 +64,12 @@ def listen():
     Then we check if we have the tokenized word in our image database, so if there is an image in that words, it adds to the list. 
 
     '''
-    mic = sr.Microphone()
-    r = sr.Recognizer()
-    with mic as source:
-        audio = r.listen(source)
-    text = r.recognize_google(audio)
-    #text = "I go to supermarket."
+    # mic = sr.Microphone()
+    # r = sr.Recognizer()
+    # with mic as source:
+    #     audio = r.listen(source)
+    #text = r.recognize_google(audio)
+    text = "I wanted to understand how to buy the food from supermarket."
     words = word_tokenize(text)
     words=[word.lower() for word in words if word.isalpha()]
     stemmed_words = [stemmer.stem(word) for word in words] #we get the stemmed version of the words
@@ -80,8 +80,8 @@ def listen():
         finalImages = [] 
         currentChar = 0
         for t in stemmed_words:
-            if pathlib.Path(f"./dataset/{t}.png").exists():
-                imageList.append(f"./dataset/{t}.png")
+            if pathlib.Path(f"./dataset/phases/{t}.png").exists():
+                imageList.append(f"./dataset/phases/{t}.png")
             else:            
                 for char in t:
                     imageList.append(("./dataset/alphabet/{}.png").format(char.lower()))
