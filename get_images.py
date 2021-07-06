@@ -6,13 +6,9 @@ letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i','j', 'k', 'l','m', 'n', '
 
 for letter in letters:
     url = f'https://www.babysignlanguage.com/dictionary-letter/?letter={letter}'
-
     response = requests.get(url)
-
     soup = bs4.BeautifulSoup(response.text, 'html.parser')
-
     content = str(soup.find_all('div', {"class": "single-letter-card"}))
-
     soup1 = bs4.BeautifulSoup(content, 'html.parser')
 
     hrefList = []

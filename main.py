@@ -12,7 +12,7 @@ from nltk.stem import PorterStemmer, WordNetLemmatizer
 #from re import search
 
 window = tk.Tk()
-window.title("Seminars in AI")
+window.title("Speech to ASL")
 window.geometry('400x200')
 window.configure(background='gold')
 
