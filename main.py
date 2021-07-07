@@ -69,10 +69,13 @@ def listen():
     # with mic as source:
     #     audio = r.listen(source)
     #text = r.recognize_google(audio)
-    text = "I wanted to understand how to buy the food from supermarket."
+    text = "I wanted to go america"
     words = word_tokenize(text)
+    print(words)
     words=[word.lower() for word in words if word.isalpha()]
+    print(words)
     stemmed_words = [stemmer.stem(word) for word in words] #we get the stemmed version of the words
+    print(stemmed_words)
     lemmatized_words = [lemmatizer.lemmatize(word) for word in words]
     try:
         returnedImage = Image.new('RGB', (512, 512))
