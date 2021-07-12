@@ -69,7 +69,7 @@ def listen():
     # with mic as source:
     #     audio = r.listen(source)
     #text = r.recognize_google(audio)
-    text = "I wanted to go america"
+    text = "I am going to buy flowers."
     words = word_tokenize(text)
     print(words)
     words=[word.lower() for word in words if word.isalpha()]
