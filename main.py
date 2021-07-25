@@ -9,6 +9,7 @@ import bs4
 import requests
 from nltk.tokenize import word_tokenize
 from nltk.stem import PorterStemmer, WordNetLemmatizer
+from nltk.corpus import stopwords
 #from re import search
 
 window = tk.Tk()
@@ -55,6 +56,17 @@ def get_images():
                 image = image.resize((512, 512), Image.ANTIALIAS)
                 image.save(f'./new/{imageInfo[0]}.png')
 # getting the text from the microphone and print it
+NORM_FONT= ("Verdana", 10)
+
+def popupmsg(msg):
+    popup = tk.Tk()
+    popup.wm_title("Output word")
+    label = tk.Label(popup, text=msg, font=NORM_FONT)
+    label.pack(side="top", fill="x", pady=10)
+    B1 = tk.Button(popup, text="Okay", command = popup.destroy)
+    B1.pack()
+    #popup.mainloop()
+
 def listen():
     '''
     This is the main function we actually using for the application. 
@@ -69,20 +81,24 @@ def listen():
     # with mic as source:
     #     audio = r.listen(source)
     #text = r.recognize_google(audio)
-    text = "I am going to buy flowers."
+    text = "Today I will plant trees in garden"
+    #popupmsg(text)
     words = word_tokenize(text)
     print(words)
     words=[word.lower() for word in words if word.isalpha()]
     print(words)
+    stop_words = set(stopwords.words("english"))
     stemmed_words = [stemmer.stem(word) for word in words] #we get the stemmed version of the words
+    filtered_list = [word for word in stemmed_words if word.casefold() not in stop_words]
     print(stemmed_words)
+    print(filtered_list)
     lemmatized_words = [lemmatizer.lemmatize(word) for word in words]
     try:
         returnedImage = Image.new('RGB', (512, 512))
         imageList = [] 
         finalImages = [] 
         currentChar = 0
-        for t in stemmed_words:
+        for t in filtered_list:
             if pathlib.Path(f"./dataset/phases/{t}.png").exists():
                 imageList.append(f"./dataset/phases/{t}.png")
             else:            
